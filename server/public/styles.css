@@ -1,0 +1,13 @@
+.card{
+  height: 30rem;
+}
+.card-img {
+  object-fit: contain;
+  height: 50%;
+  width: 100%;
+}
+
+body{
+  background-color: teal;
+  overflow-x: hidden;
+}
