@@ -6,6 +6,14 @@
   height: 50%;
   width: 100%;
 }
+.details-img {
+  object-fit: contain;
+  height: 50%;
+  width: 80%;
+}
+.catalog-return :hover{
+  cursor: pointer;
+}
 
 body{
   background-color: teal;
