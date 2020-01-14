@@ -23,10 +23,14 @@ export default class App extends React.Component {
     return this.state.isLoading
       ? <h1>Testing connections...</h1>
       : (
-        <div>
-          <Header/>
-          <ProductList/>
-        </div>
+        <>
+          <div className="container-fluid bg-dark">
+            <Header/>
+          </div>
+          <div className="container-fluid">
+            <ProductList/>
+          </div>
+        </>
 
       );
   }
