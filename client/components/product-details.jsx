@@ -11,7 +11,6 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    // ${this.props.product.productId}
     fetch(`./api/products/${this.props.view.params.productId}`)
       .then(response => {
         return response.json();
