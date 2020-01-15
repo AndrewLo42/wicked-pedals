@@ -88,7 +88,7 @@ app.post('/api/cart', (req, res, next) => {
     .then(price => {
       const productPrice = price.rows[0];
       if (!productPrice) {
-        Promise.reject((new ClientError(`Cannot find product price with Id ${productId}`, 400)));
+        return Promise.reject((new ClientError(`Cannot find product price with Id ${productId}`, 400)));
       }
       if (!req.session.cartId) {
         const sql = `
