@@ -136,6 +136,28 @@ app.post('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/orders', (req, res, next) => {
+  if (!req.session.cartId) {
+    return next(new ClientError('Please enable cookies!'), 400);
+  }
+  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+    return next(new ClientError('Missing parameters to place order!'), 400);
+  } else {
+    const sql = `
+       insert into "orders" ("cartId", "name", "creditCard", "shippingAddress")
+        values ($1, $2, $3, $4)
+        returning "createdAt", "creditCard", "name", "orderId", "shippingAddress"
+    `;
+    const params = [req.session.cartId, req.body.name, parseInt(req.body.creditCard), req.body.shippingAddress];
+    db.query(sql, params)
+      .then(result => {
+        delete req.session.cartId;
+        res.status(201).json(result.rows[0]);
+      })
+      .catch(err => next(err));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
