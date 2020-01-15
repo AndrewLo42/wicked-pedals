@@ -8,6 +8,7 @@ class ProductDetails extends React.Component {
     };
     this.setCatalogView = this.setCatalogView.bind(this);
     this.renderPrice = this.renderPrice.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +19,10 @@ class ProductDetails extends React.Component {
       .then(data => {
         this.setState({ product: data });
       });
+  }
+
+  addItemToCart() {
+    this.props.addToCart({ productId: this.state.product.productId });
   }
 
   setCatalogView() {
@@ -46,6 +51,7 @@ class ProductDetails extends React.Component {
                 <h1 className="">{this.state.product.name}</h1>
                 <div className=" text-muted">{this.renderPrice()}</div>
                 <p className="mt-3 ">{this.state.product.shortDescription}</p>
+                <button className="btn btn-primary" onClick={this.addItemToCart}>Add to Cart</button>
               </div>
             </div>
             <p className="p-2">{this.state.product.longDescription}</p>
