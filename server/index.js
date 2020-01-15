@@ -74,7 +74,7 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/cart', (req, res, next) => {
-  const productId = req.body.productId;
+  const productId = parseInt(req.body.productId);
   if (productId === undefined) {
     return next(new ClientError('productId must be a positive integer'), 400);
   }
