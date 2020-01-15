@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getCartItems();
     fetch('/api/health-check')
       .then(res => res.json())
       .then(data => this.setState({ message: data.message || data.error }))
@@ -71,6 +73,10 @@ export default class App extends React.Component {
           <ProductList setView={this.setView} />
         </div>
       );
+    } else if (this.state.view.name === 'cart') {
+      return (
+        <CartSummary cartItems={this.state.cart} setView={this.setView} />
+      );
     } else {
       return (
         <ProductDetails setView={this.setView} view={this.state.view} addToCart={this.addToCart}/>
@@ -82,7 +88,7 @@ export default class App extends React.Component {
     return (
       <>
         <div className="container-fluid bg-dark">
-          <Header cartItemCount={this.state.cart.length}/>
+          <Header cartItemCount={this.state.cart.length} setView={this.setView}/>
         </div>
         {this.renderView()}
       </>
