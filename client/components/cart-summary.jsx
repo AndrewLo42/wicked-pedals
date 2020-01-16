@@ -5,10 +5,15 @@ class CartSummary extends React.Component {
   constructor(props) {
     super(props);
     this.setCatalogView = this.setCatalogView.bind(this);
+    this.setCheckout = this.setCheckout.bind(this);
   }
 
   setCatalogView() {
     this.props.setView('catalog', {});
+  }
+
+  setCheckout() {
+    this.props.setView('checkout', {});
   }
 
   renderCart() {
@@ -27,6 +32,12 @@ class CartSummary extends React.Component {
     return (sum / 100).toFixed(2);
   }
 
+  renderCheckoutButton() {
+    if (this.props.cartItems.length) {
+      return <button className="btn btn-warning mt-1 mb-1" onClick={this.setCheckout}>Checkout</button>;
+    }
+  }
+
   render() {
     return (
       <div className="container cart-container">
@@ -38,10 +49,13 @@ class CartSummary extends React.Component {
         <div className="item-container">
           {this.renderCart()}
         </div>
-        <div className="cart-total badge badge-dark mt-1 mb-1">
-          <h4 className="">
+        <div className="row justify-content-between m-1">
+          <div className="cart-total badge badge-dark mt-1 mb-1">
+            <h4 className="">
           Total: ${this.renderTotal()}
-          </h4>
+            </h4>
+          </div>
+          {this.renderCheckoutButton()}
         </div>
       </div>
     );
