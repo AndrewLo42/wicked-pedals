@@ -158,6 +158,31 @@ app.post('/api/orders', (req, res, next) => {
   }
 });
 
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  if (!req.session.cartId) {
+    return next(new ClientError('Please enable cookies!'), 400);
+  }
+  const cartItemId = req.params.cartItemId;
+  if (!parseInt(cartItemId, 10)) {
+    return next(new ClientError(`${cartItemId} must be a positive integer`, 400));
+  }
+  const sql = `
+    delete from "cartItems"
+      where "cartItemId" = $1
+  `;
+  const params = [cartItemId];
+  db.query(sql, params)
+    .then(result => {
+      if (result.rowCount === 0) {
+        return next(new ClientError(`Cannot find cart item with ID ${cartItemId}`, 400));
+      } else {
+        res.status(204).json({
+          alert: 'Item deleted from cart'
+        });
+      }
+    });
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
