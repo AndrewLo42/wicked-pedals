@@ -21,7 +21,7 @@ class CartSummary extends React.Component {
       return (<h3 className="text-center border">Cart is Empty!</h3>);
     } else {
       const cartList = this.props.cartItems.map(item =>
-        <CartSummaryItem key={item.cartItemId} item={item} />);
+        <CartSummaryItem key={item.cartItemId} item={item} deleteFromCart={this.props.deleteFromCart}/>);
       return cartList;
     }
   }
@@ -51,7 +51,7 @@ class CartSummary extends React.Component {
         </div>
         <div className="row justify-content-between m-1">
           <div className="cart-total badge badge-dark mt-1 mb-1">
-            <h4 className="">
+            <h4 className="pt-1">
           Total: ${this.renderTotal()}
             </h4>
           </div>

@@ -40,7 +40,7 @@ class ProductDetails extends React.Component {
     } else {
       return (
         <div className="container container-fluid mt-3">
-          <div className="border border-info pt-2 bg-white">
+          <div className="border border-info pt-2 bg-white details-container">
             <div className="m-2 catalog-return ">
               <i className="d-inline fas fa-chevron-circle-left" onClick={this.setCatalogView}></i>
               <div className="d-inline ml-1" onClick={this.setCatalogView}>Back to Catalog</div>

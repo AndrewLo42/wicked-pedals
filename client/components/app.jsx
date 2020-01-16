@@ -19,6 +19,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
@@ -68,6 +69,19 @@ export default class App extends React.Component {
       });
   }
 
+  deleteFromCart(cartItemId) {
+    fetch(`/api/cart/${cartItemId}`, {
+      method: 'DELETE'
+    })
+      .then(() => {
+        const cartCopy = [...this.state.cart];
+        const cartItemIdx = cartCopy.findIndex(item =>
+          item.cartItemId === cartItemId);
+        cartCopy.splice(cartItemIdx, 1);
+        this.setState({ cart: cartCopy });
+      });
+  }
+
   placeOrder(orderInfo) {
     fetch('/api/orders', {
       method: 'POST',
@@ -94,7 +108,7 @@ export default class App extends React.Component {
       );
     } else if (this.state.view.name === 'cart') {
       return (
-        <CartSummary cartItems={this.state.cart} setView={this.setView} />
+        <CartSummary cartItems={this.state.cart} setView={this.setView} deleteFromCart={this.deleteFromCart}/>
       );
     } else if (this.state.view.name === 'checkout') {
       return (
