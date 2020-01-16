@@ -23,6 +23,14 @@
   height: 80%;
 }
 
+.cart-item-container{
+  border-radius: 1%;
+}
+.details-container{
+  border-radius: 2%;
+}
+
+.home-tag,
 .cart-icon-container :hover,
 .catalog-return :hover{
   cursor: pointer;

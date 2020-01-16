@@ -4,6 +4,11 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.setCartView = this.setCartView.bind(this);
+    this.goHome = this.goHome.bind(this);
+  }
+
+  goHome() {
+    this.props.setView('catalog', {});
   }
 
   setCartView() {
@@ -16,12 +21,14 @@ class Header extends React.Component {
         <div className="p-3 row justify-content-between">
           <div className="text-white">
             <i className=" d-inline col fas fa-dollar-sign p-1"></i>
-            <div className="d-inline">Wicked Sales </div>
+            <div className="d-inline home-tag" onClick={this.goHome}>Wicked Sales </div>
           </div>
-          <div className="cart-icon-container" >
-            <div className="text-white mr-4" onClick={this.setCartView}> {this.props.cartItemCount} items
-              <i className="ml-2 fas fa-shopping-cart" onClick={this.setCartView}></i>
-            </div>
+          <div className="cart-icon-container text-center " >
+            <button className="btn btn-primary" onClick={this.setCartView}>
+              <i className="mr-1 fas fa-shopping-cart" ></i>
+              <div className="badge badge-pill badge-dark text-white mr-0" > {this.props.cartItemCount}</div>
+
+            </button>
           </div>
 
         </div>
