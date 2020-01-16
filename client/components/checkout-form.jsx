@@ -45,7 +45,7 @@ class CheckoutForm extends React.Component {
     event.preventDefault();
     const customerInfo = {
       name: this.state.name,
-      creditCard: parseInt(this.state.creditCard),
+      creditCard: this.state.creditCard,
       shippingAddress: this.state.shippingAddress
     };
     this.props.onSubmit(customerInfo);
