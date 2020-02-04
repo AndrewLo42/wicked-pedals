@@ -34,6 +34,10 @@ class ProductDetails extends React.Component {
     return `$ ${convertedPrice}`;
   }
 
+  toggleAddModal() {
+
+  }
+
   render() {
     if (this.state.product === null) {
       return null;
@@ -47,7 +51,7 @@ class ProductDetails extends React.Component {
             </div>
             <div className="row p-2">
               <img className="col-md-6 col-sm-6 m-2 details-img" src={this.state.product.image} alt={this.state.product.name}></img>
-              <div className="col-md-4 col-xs-12">
+              <div className="col-md-5 col-xs-12">
                 <h1 className="">{this.state.product.name}</h1>
                 <div className=" text-muted">{this.renderPrice()}</div>
                 <p className="mt-3 ">{this.state.product.shortDescription}</p>

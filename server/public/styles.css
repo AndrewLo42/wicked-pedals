@@ -1,6 +1,6 @@
 
 .card{
-  height: 30rem;
+  height: 25rem;
 }
 .card-img {
   object-fit: contain;
@@ -37,7 +37,24 @@
   cursor: pointer;
 }
 
+.item-card{
+  transition: .25s all;
+}
+
+.item-card:hover{
+  transform: translateY(-5px);
+}
+
 body{
   background-color: teal;
   overflow-x: hidden;
+}
+
+* {
+  animation: fade-in 0.5s;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }

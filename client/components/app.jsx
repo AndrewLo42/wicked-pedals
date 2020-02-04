@@ -124,10 +124,11 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <div className="container-fluid bg-dark">
+        <div className="container-fluid bg-dark sticky-top">
           <Header cartItemCount={this.state.cart.length} setView={this.setView}/>
         </div>
         {this.renderView()}
+
       </>
     );
   }
