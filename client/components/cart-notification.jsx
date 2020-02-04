@@ -17,12 +17,19 @@ class CartNotification extends React.Component {
   }
 
   render() {
-    const shouldShow = this.state.visible;
+    const shouldShow = this.props.appear;
     if (!shouldShow) {
-      return (<></>);
+      return (null);
     } else {
       return (
-        <div>Added</div>
+        <>
+          {this.openNotification()}
+          <div className="position-fixed h-100 w-100 d-flex overlay">
+            <div className="m-auto p-3">
+              <h5 className="text-center">Item Added To Cart</h5>
+            </div>
+          </div>
+        </>
       );
     }
   }

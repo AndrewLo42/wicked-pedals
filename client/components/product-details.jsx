@@ -34,6 +34,10 @@ class ProductDetails extends React.Component {
     return `$ ${convertedPrice}`;
   }
 
+  toggleAddModal() {
+
+  }
+
   render() {
     if (this.state.product === null) {
       return null;
