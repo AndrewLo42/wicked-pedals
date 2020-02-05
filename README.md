@@ -14,7 +14,7 @@ Formerly known as Wicked Sales.  Full-stack e-commerce experience for guitar ped
 - AWS EC2
 
 # Live Demo
-Link: http://exodia-exodus.andrewclo.com/
+Link: http://wicked-pedals.andrewclo.com/
 
 # Features
 - User can view list of all products
