@@ -14,7 +14,7 @@ Formerly known as Wicked Sales.  Full-stack e-commerce experience for guitar ped
 - AWS EC2
 
 # Live Demo
-Link: 
+Link: http://exodia-exodus.andrewclo.com/
 
 # Features
 - User can view list of all products
@@ -24,5 +24,6 @@ Link:
 - User can enter their purchase information
 
 # Preview
+![pedals]https://user-images.githubusercontent.com/42481062/73804149-b6b1b000-4777-11ea-87d4-20cef4e50895.png
 
  _This is for showcase purposes only, please do not use this app using real information_ 
