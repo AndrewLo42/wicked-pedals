@@ -172,7 +172,10 @@ CREATE TABLE public.products (
     price integer NOT NULL,
     image text NOT NULL,
     "shortDescription" text NOT NULL,
-    "longDescription" text NOT NULL
+    "longDescription" text NOT NULL,
+    brand text,
+    "pedalType" text,
+    "productType" text
 );
 
 
@@ -229,30 +232,6 @@ ALTER TABLE ONLY public.products ALTER COLUMN "productId" SET DEFAULT nextval('p
 --
 
 COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
-1	4	2	2595
-2	5	2	2595
-3	6	2	2595
-4	6	2	2595
-5	6	1	2999
-6	6	3	2900
-7	7	1	2999
-8	7	4	999
-9	7	1	2999
-10	8	2	2595
-11	8	2	2595
-12	8	2	2595
-13	8	1	2999
-14	8	2	2595
-15	8	2	2595
-16	9	2	2595
-17	9	5	9900
-18	9	4	999
-19	10	2	2595
-20	10	5	9900
-21	10	2	2595
-22	11	2	2595
-23	11	5	9900
-24	11	2	2595
 \.
 
 
@@ -261,15 +240,6 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 --
 
 COPY public.carts ("cartId", "createdAt") FROM stdin;
-3	2020-01-14 21:27:29.737729+00
-4	2020-01-14 22:46:12.533084+00
-5	2020-01-14 22:56:36.248938+00
-6	2020-01-14 23:01:00.038632+00
-7	2020-01-15 01:30:28.131524+00
-8	2020-01-15 18:39:39.024072+00
-9	2020-01-15 19:55:28.299689+00
-10	2020-01-15 19:59:09.076212+00
-11	2020-01-15 20:00:36.412873+00
 \.
 
 
@@ -285,13 +255,19 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-1	Shake Weight	2999	/images/shake-weight.jpg	Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-2	ShamWow	2595	/images/shamwow.jpg	It's like a chamois, towel, and sponge, all in one! Soaks up to 10x it's weight in any liquid!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-3	Snuggie	2900	/images/snuggie.jpg	Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-4	Wax Vac	999	/images/wax-vac.jpg	Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-5	Ostrich Pillow	9900	/images/ostrich-pillow.jpg	Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-6	Tater Mitts	830	/images/tater-mitts.jpg	8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
+COPY public.products ("productId", name, price, image, "shortDescription", "longDescription", brand, "pedalType", "productType") FROM stdin;
+1	Avalanche Run	29999	/images/avalancherun.jpg	The EarthQuaker Avalanche Run V2 Stereo Reverb & Delay Pedal with Tap Tempo was developed to take floating ambient tones to the next level.	The Avalanche Run is a dreamy sonic discovery device with up to 2 seconds of delay time and a lush stereo reverb. It features complete control over delay time, repeats, mix and voice (with the tone control), as well as control over the reverb length and mix. It can run in one of 3 different modes: Normal, Reverse and Swell. In “Normal” mode, the Avalanche Run functions as a straightforward delay and reverb. In “Reverse” mode, the delay line is in reverse and the reverb remains in normal mode. In “Swell” mode, the Avalanche Run reacts to your picking dynamics and adds a volume swell to the entire signal path much like manually raising and lowering the volume of your guitar. The EarthQuaker Avalanche Run V2 Stereo Reverb & Delay Pedal with Tap Tempo features an expression jack that can be assigned to one of six different controls using the “EXP” selector switch. It also features Tap Tempo with six different ratios accessed via the “Ratio” selector switch. The Avalanche Run can also be run in “True Bypass” mode or “Buffered Bypass” mode for trails and features 5 different tail lengths including “Infinite” for lo-fi and continuously degrading pseudo-looping.	EarthQuaker	Reverb	Pedal
+2	Plumes	9999	/images/plumes.jpg	Armed with JFET op-amps, this high-headroom OD is chock-full of chime and clarity.	Many overdrives are a one-trick pony, but not Plumes — its three clipping modes make it one of the most versatile OD stompboxes out there. Mode 1 offers symmetrical LED clipping, supplying you with loads of crunch and compression. This is a great setting for down-and-dirty rock ‘n’ roll tones. Mode 2 is a wide-open op-amp clean boost. This setting dispenses with the soft-clipping diodes altogether, leaving you with a straight op-amp drive that’s perfect for pushing your clean amp into restrained breakup. Mode 3 is an asymmetrical silicon diode arrangement that produces a familiar-sounding drive, but with more clarity and transparency. Plumes covers a lot of ground in a lot of situations; but when we ran it through its paces here at Sweetwater, we found that it works its best magic in front of a dirty amp.	EarthQuaker	Overdrive	Pedal
+3	Tube Screamer	8499	/images/tubescreamer.jpg	 Tone, drive, and level controls give you access to warm, amp-like overdrive that's touch sensitive and ready to rip.	The Ibanez TS9DX Overdrive guitar effect pedal is a straightforward design for a guitar effect pedal. While the Ibanez guitar effect pedal does not include a number of bells and whistles, it is a classic style that continues to be successful. The Ibanez guitar effect pedal includes a classic tube style screamer. In addition to the classic style, the pedal includes three settings for better sound choices. The Ibanez TS9DX Overdrive guitar effect pedal includes three settings, featuring hot, turbo, and increased low end crunch. The guitar effect pedal includes a power supply need of a 9-volt battery or from an AC adaptor. The dimensions of the Ibanez guitar effect pedal are 4.88 inches deep by 2.91 inches wide by 2.09 inches tall. The guitar effect pedal weighs 1.26 lbs. This Ibanez guitar effect pedal is designed to offer the best sound effects without too many overwhelming controls, features, or options.	Ibanez	Overdrive	Pedal
+4	Soul Food	8999	/images/soulfood.jpg	The Soul Food delivers transparent overdrive with great touch and response. A perfect Klon clone for any guitarist!	Tone aficionados kept telling EHX’s Mike Matthews about a pedal that had achieved a lot of buzz because it was only obtainable at an exorbitant price. That pedal was the KLON CENTAUR. A believer in bringing great tools to starving musicians, Mike tasked his trusty team to create an affordable alternative, and that is how the SOUL FOOD was cooked up.The SOUL FOOD delivers transparent overdrive with great touch and response. Its circuitry features boosted power rails to provide abundant headroom and increased definition. Best of all, you don’t have to be a rock star to own one!Features:Transparent overdriveBoosted power rails for extended headroom and definitionSuper responsiveCompact, rugged designSelectable true bypass or buffered bypass modes9.6DC-200 power supply included. Also runs on 9 Volt battery (Not included)Order your Electro-Harmonix Soul Food Distortion/Fuzz/Overdrive Pedal from Sam Ash Direct today with the security of our 45/60 day return/price protection policy, and be sure to take advantage of our fast, free shipping.	Electro-Harmonix	Overdrive	Pedal
+5	Holy Grail	7999	/images/holygrail.jpg	Divine reverb for mere mortals. Down from the heavens comes the Holy Grail, a compact digital reverb guitar pedal that is priced so low thou shalt not covet thy neighbor's reverb tank any longer.	The Holy Grail is Digital Reverb in a compact guitar pedal. It contains three different reverb algorithms: SPRING, HALL, and FLERB. All three algorithms were designed and tailored for the electric guitar but they will work equally as well on most instruments and voices. The SPRING algorithm is a recreation of the classic spring reverbs that are found in many guitar amplifiers. The HALL algorithm is a new, lush reverb. Finally FLERB is a beautiful reverb like nothing you have heard before and may help you play your instruments in new ways. Connect your instrument into the INPUT jack and your amp into the OUTPUT jack. Plug the DC adaptor into the US96DC-200BI jack and then plug the DC adaptor into a wall outlet.	Electro-Harmonix	Reverb	Pedal
+6	Miku Stomp	69999	/images/miku.jpg	Hatsune Miku sings when you play your guitar!	Miku singles according to the guitar! MIKU STOMP is a compact effector for guitar singing by Miku Hatsune according to the input guitar sound. Just by connecting your guitar, you can easily make it to Hatsune Miku. The core of the sound synthesis technology is "eVocaloid ^ " by Yamaha's new generation sound source NSX-1. You can enjoy playing Hatsune Miku easily expressing expression with the playing style unique to guitar different from driving and keyboard.	Korg	Filter	Pedal
+7	POG 2	24999	/images/pog2.jpg	Easy to use yet packed with features, this polyphonic octave generator expands the capabilities of electric guitars.	The POG2 is based on the original POG polyphonic octave pedal EHX released more than a decade ago, which earned worldwide acclaim due to its versatility and performance. Now with more options, this pedal by EHX allows you to create sonic landscapes of epic complexity with a single pedal. From 12-string guitars and orchestral walls of sound to dreamy swells and arpeggios, the Electro-Harmonix POG2 can do it all.The POG2 includes a wide array of functions you can use simultaneously to create the sound you want. First, you can add one and two octaves up to your instrument’s voice as well as one and two octaves down with independent sliders for full control of the resulting voice. A slider for the dry signal of your guitar is also included for a total of five independent controls. The resulting octave mix can make your guitar sound like a simple bass, a bright synth, a five-layered symphonic wall, and anything in between. The possibilities are endless.Adding to this signature functionality, this Electro-Harmonix polyphonic octave generator includes three powerful effects, each with an independent slider for full control of each one. The attack effect acts as a gradual delay for string picking or plucking action and is great for long swells and reverse-like sounds. The low-pass filter slider controls the cutoff frequency for further control of the tone and warmth of the resulting voice mix, which is great for imitating other instruments. Lastly, using the detune slider results in an interesting effect that is reminiscent of chorus and reverb, adding extra thickness to the audio signal.A bright LED at the top of the unit indicates the active combination of these effects, controlled via the dry FX adjacent button that cycles through them. Below, the Q button controls the resonance of the low-pass filter effect, dramatically changing the tonal quality for enhanced versatility.On the right side of the pedal’s face, the presets module allows you to edit the default sounds or create your own combinations of settings for long-term storage and quick recall. Up to eight presets can be customized and stored in the unit’s memory. Cycle through your presets effortlessly with the left footswitch.\\	Electro-Harmonix	Filter	Pedal
+8	Cry Baby Wah	9999	/images/crybaby.jpg	You can get the classic wah howl that artists such as Jimi Hendrix and Eric Clapton loved in the 60s. This guitar effects petal can be an essential addition to your guitar gear.	The Dunlop Cry Baby Wah was one of the company’s original wahs. Although its sound was modeled after the Vox Cry Baby pedal, the Dunlop version quickly became the leader due to its excellent sound. It can create a rhythmic, slightly funky wah effect that appears on many famous recordings. Dunlop has also released several artist signature versions of the classic pedal, including the JH-1 Jimi Hendrix Signature, SW-95 Slash Signature, and ZW-45 Zakk Wylde Signature. Wah-wah can be an excellent effect to add to your guitar gear. This type of pedal bends the tone of your instrument, imitating the sound you make when you say “wah-wah.” Although it was originally intended to mimic the sound of a mute in a trumpet bell, the wah pedal developed its own characteristic howl. Wah pedals can work best in solos and lead guitar riffs. The Dunlop GCB95 Cry Baby wah pedal includes high quality electronics that can keep it sounding great through years of use. It features a Hot Potz potentiometer which can bend pitches with amazing response times. It features both a power adapter input and a battery connection, which can let you choose how you power the device. If you are near a power source, simply plug in the AC adapter. If you want to keep your stage clear of extra cables, you can add a 9-volt battery. The pedal includes a bypass switch, so you can turn it on and off while you continue to play. This effect’s inductor can help produce its classic analog sound. It can be easy to set up and start using the Dunlop Cry Baby wah pedal. You can simply add a power source, plug a guitar into the input connection, and connect the output to a guitar amp.	Dunlop	Filter	Pedal
+9	Patch Cable	599	/images/pancakepatch.jpg	This cable is designed to interconnect electric guitar pedal effects. Low-profile, right-angle plugs allow close spacing of pedal effects on pedalboards.	• Serviceable, all-metal plugs for live-sound applications\r\n• Oxygen-Free Copper (OFC) conductor for enhanced signal clarity\r\n• OFC spiral shield for effective EMI and RFI rejection and flexibility	Hosa	\N	Supply
+10	Pedal Power	16999	/images/pedalpower.jpg	The voodoo lab pedal power 2 is compatible with all battery guitar pedal effects. It has short circuit protection and comes with isolated outputs which you can combine and create more then 18V. 	The Voodoo Lab Pedal Power 2 Plus is a universal power supply for all battery-operated guitar pedal effects. New features include two outputs that will power Line 6 modeling pedals and two outputs that can have a variable voltage sag to emulate dying carbon batteries. Like the original Pedal Power, each of its eight outputs are completely isolated, short-circuit protected, regulated, and highly filtered. The Pedal Power 2 Plus comes complete with cables and a detachable AC power cord; it is handmade in the US and carries a 5-year warranty.	Voodoo Lab	\N	Supply
+11	Hall of Fame	19999	/images/hof.jpg	The revolutionary MASH technology adds the rich and fluid articulation of an expression pedal to your reverb effects in the same compact stompbox that you know.	You can control pretty much any parameter conceivable with MASH. With the TonePrint Editor you can unleash the expressive potential in MASH any way you like. Of course, you can still get all the iconic reverbs and TonePrints that you know from the original.	TC Electronic	Reverb	Pedal
+12	Tortex Picks	399	/images/picks.jpg	Dunlop 418P.73 Tortex Standard .73mm Yellow Guitar Picks 12-Pack	Dunlop guitar picks are a top choice of today's pro musician! Dunlop's wide variety of gauges, shapes, sizes and materials allows the player to select the exact pick for his/her own particular style of playing. From classic country to nu-metal, every great player knows that their pick is an integral part of their tone, and Dunlop guitar picks are the picks that more pros rely on in the studio or on stage. Picks are a grossly underrated accessory. Don't sacrifice your tone...pick Dunlop guitar picks! This package of 418P-73 picks contains 12 yellow Tortex picks.	Dunlop	\N	Supply
 \.
 
 
@@ -299,14 +275,14 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 24, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 11, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 1, true);
 
 
 --
@@ -365,4 +341,3 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
-
