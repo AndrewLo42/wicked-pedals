@@ -17,11 +17,22 @@ class CartSummary extends React.Component {
   }
 
   renderCart() {
+    const duplicateProducts = {};
+    const productsToShow = [];
+    this.props.cartItems.map(product => {
+      if (duplicateProducts[product.productId] !== undefined) {
+        duplicateProducts[product.productId] += 1;
+      } else {
+        duplicateProducts[product.productId] = 1;
+        productsToShow.push(product);
+      }
+    });
+
     if (!this.props.cartItems.length) {
       return (<h3 className="text-center border">Cart is Empty!</h3>);
     } else {
-      const cartList = this.props.cartItems.map(item =>
-        <CartSummaryItem key={item.cartItemId} item={item} deleteFromCart={this.props.deleteFromCart}/>);
+      const cartList = productsToShow.map(item =>
+        <CartSummaryItem key={ item.cartItemId } quantity={duplicateProducts[item.productId]}item={ item } deleteFromCart={ this.props.deleteFromCart } addToCart={ this.props.addToCart } />);
       return cartList;
     }
   }
@@ -45,7 +56,7 @@ class CartSummary extends React.Component {
           <i className="d-inline fas fa-chevron-circle-left" onClick={this.setCatalogView}></i>
           <div className="d-inline ml-1" onClick={this.setCatalogView}>Back to Catalog</div>
         </div>
-        <h1 className='m-2'>My Cart</h1>
+        <h1 className="m-2 cart-title">My Cart</h1>
         <div className="item-container">
           {this.renderCart()}
         </div>

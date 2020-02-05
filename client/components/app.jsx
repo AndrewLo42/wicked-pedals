@@ -62,9 +62,9 @@ export default class App extends React.Component {
       .then(response => {
         return response.json();
       })
-      .then(data => {
+      .then(productItem => {
         const cartCopy = [...this.state.cart];
-        cartCopy.push(data);
+        cartCopy.push(productItem);
         this.setState({ cart: cartCopy });
       });
   }
@@ -103,12 +103,12 @@ export default class App extends React.Component {
     if (this.state.view.name === 'catalog') {
       return (
         <div className="container-fluid">
-          <ProductList setView={this.setView} />
+          <ProductList setView={this.setView} addToCart={this.addToCart} />
         </div>
       );
     } else if (this.state.view.name === 'cart') {
       return (
-        <CartSummary cartItems={this.state.cart} setView={this.setView} deleteFromCart={this.deleteFromCart}/>
+        <CartSummary cartItems={this.state.cart} setView={this.setView} deleteFromCart={this.deleteFromCart} addToCart={this.addToCart} />
       );
     } else if (this.state.view.name === 'checkout') {
       return (
@@ -124,7 +124,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <div className="container-fluid bg-dark sticky-top">
+        <div className="container-fluid bg-dark sticky-top shadow-sm">
           <Header cartItemCount={this.state.cart.length} setView={this.setView}/>
         </div>
         {this.renderView()}

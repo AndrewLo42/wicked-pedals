@@ -21,7 +21,7 @@ app.get('/api/health-check', (req, res, next) => {
 
 app.get('/api/products', (req, res, next) => {
   const sql = `
-    select "productId", "name", "price", "image", "shortDescription"
+    select "productId", "name", "price", "image", "shortDescription", "brand", "productType", "pedalType"
       from "products"
   `;
   db.query(sql)
