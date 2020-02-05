@@ -4,6 +4,11 @@ class cartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.removeItem = this.removeItem.bind(this);
+    this.addAnother = this.addAnother.bind(this);
+  }
+
+  addAnother() {
+    this.props.addToCart({ productId: this.props.item.productId });
   }
 
   renderPrice() {
@@ -25,7 +30,19 @@ class cartSummaryItem extends React.Component {
               <h5>{this.props.item.name}</h5>
               <div className="text-muted">{this.renderPrice()}</div>
               <div className="pr-1">{this.props.item.shortDescription}</div>
-              <button className="btn btn-danger mt-1 remove-btn" onClick={this.removeItem}>Remove</button>
+              <div className="d-flex items-number-container">
+                <i className="fas fa-minus-circle my-auto mr-2" onClick={this.removeItem}></i>
+                <div className="quantity-container p-2 my-auto d-flex">
+                  <div className="my-auto">
+                    Quantity:
+                  </div>
+                  <div className="my-auto ml-2 badge badge-pill badge-dark">
+                    {this.props.quantity}
+                  </div>
+                </div>
+                <i className="fas fa-plus-circle my-auto ml-2" onClick={this.addAnother}></i>
+              </div>
+
             </div>
           </div>
         </div>
