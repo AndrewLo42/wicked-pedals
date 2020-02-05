@@ -23,6 +23,12 @@ Link: http://exodia-exodus.andrewclo.com/
 - User can get to the checkout page
 - User can enter their purchase information
 
+# Future Features 
+- User can sort products by category
+- User can validate information in checkout 
+- Checkout form revamp 
+- User can create account to track past purchases
+
 # Preview
 ![pedals](https://user-images.githubusercontent.com/42481062/73804149-b6b1b000-4777-11ea-87d4-20cef4e50895.png)
 
