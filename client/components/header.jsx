@@ -19,7 +19,7 @@ class Header extends React.Component {
     return (
       <div className="p-3 bg-dark header">
         <div className="container-fluid">
-          <div className="p-3 row justify-content-between">
+          <div className="d-flex p-3 row justify-content-md-between justify-content-center">
             <div className="header-title text-white">
               <i className=" d-inline col fas fa-guitar p-1"></i>
               <div className="d-inline home-tag" onClick={this.goHome}>Wicked Pedals </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import FormInputs from './form-inputs.jsx';
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -6,7 +7,25 @@ class CheckoutForm extends React.Component {
     this.state = {
       name: '',
       creditCard: '',
-      shippingAddress: ''
+      shippingAddress: '',
+      secondAddressLine: '',
+      usState: '',
+      zipcode: '',
+      phoneNumber: '',
+      email: '',
+      consent: false,
+      formValidation: {
+        name: true,
+        creditCard: true,
+        shippingAddress: true,
+        secondAddressLine: true,
+        usState: true,
+        zipcode: true,
+        phoneNumber: true,
+        email: true,
+        consent: true
+      }
+
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCardChange = this.handleCardChange.bind(this);
@@ -57,12 +76,20 @@ class CheckoutForm extends React.Component {
         <div className="container">
           <h1 className="text-center">Cart Checkout</h1>
           <div>
-            <h4 className="text-warning m-2">
+            <h4 className="text-secondary m-2">
             Order Total: ${this.renderTotal()}
             </h4>
           </div>
+          <div className="m-2 catalog-return ">
+            <i className="d-inline fas fa-chevron-circle-left" onClick={this.setCatalogView}></i>
+            <div className="d-inline ml-1" onClick={this.setCatalogView}>Continue Shopping</div>
+          </div>
         </div>
-        <div className="container">
+
+        <div className="">
+          <FormInputs onSubmit={this.props.onSubmit}/>
+        </div>
+        {/* <div className="container">
           <form onSubmit={this.handleSubmit}>
             <h5>Name</h5>
             <div className="name-input form-group input-group">
@@ -89,6 +116,8 @@ class CheckoutForm extends React.Component {
                 placeholder="Credit Card Info"
                 onChange={this.handleCardChange}
                 autoComplete="off"
+                minLength="16"
+                maxLength="16"
                 className="form-rounded form-control">
               </input>
             </div>
@@ -107,6 +136,11 @@ class CheckoutForm extends React.Component {
                 rows="4">
               </textarea>
             </div>
+            <div className="consent-input form-group input-group">
+              <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+              <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+            </div>
+
             <div className="row justify-content-between">
               <div className="m-2 catalog-return ">
                 <i className="d-inline fas fa-chevron-circle-left" onClick={this.setCatalogView}></i>
@@ -117,7 +151,7 @@ class CheckoutForm extends React.Component {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
     );
   }

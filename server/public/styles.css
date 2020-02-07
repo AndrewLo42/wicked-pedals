@@ -4,7 +4,7 @@
 }
 
 .card{
-  height: 25rem;
+  height: 27rem;
   position: relative;
 }
 
@@ -52,12 +52,12 @@
 .details-img {
   object-fit: contain;
   height: 15em;
-  width: 80%;
+  width: 100%;
 }
 
 .cart-img{
   object-fit: contain;
-  height: 10em;
+  height: 8rem;
   width: 40%;
 }
 
@@ -79,7 +79,7 @@
   border-radius: 1%;
 }
 .details-container{
-  border-radius: 2%;
+  border-radius: 5px;
 }
 
 .home-tag,
@@ -99,6 +99,10 @@
 
 .item-card:hover{
   transform: translateY(-5px);
+}
+
+#input-form {
+  border: 2px solid lightskyblue;
 }
 
 body{
