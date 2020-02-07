@@ -50,12 +50,15 @@ class ProductDetails extends React.Component {
               <div className="d-inline ml-1" onClick={this.setCatalogView}>Back to Catalog</div>
             </div>
             <div className="row p-2">
-              <img className="col-md-6 col-sm-6 m-2 details-img" src={this.state.product.image} alt={this.state.product.name}></img>
+              <img className="col-md-6  m-2 details-img" src={this.state.product.image} alt={this.state.product.name}></img>
               <div className="col-md-5 col-xs-12">
-                <h1 className="text-m-center">{this.state.product.name}</h1>
-                <div className=" text-muted">{this.renderPrice()}</div>
+                <h1 className="text-md-left text-center">{this.state.product.name}</h1>
+                <div className="text-md-left text-center text-muted">{this.renderPrice()}</div>
                 <p className="mt-3 ">{this.state.product.shortDescription}</p>
-                <button className="btn btn-primary" onClick={this.addItemToCart}>Add to Cart</button>
+                <div className=" text-md-left text-center">
+                  <button className="btn btn-primary" onClick={this.addItemToCart}>Add to Cart</button>
+
+                </div>
               </div>
             </div>
             <p className="p-2">{this.state.product.longDescription}</p>

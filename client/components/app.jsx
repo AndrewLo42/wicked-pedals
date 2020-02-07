@@ -11,6 +11,10 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
+      introModalStatus: {
+        show: true,
+        displayNone: false
+      },
       view: {
         name: 'catalog',
         params: {}
@@ -21,6 +25,7 @@ export default class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.deleteFromCart = this.deleteFromCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.toggleIntroModal = this.toggleIntroModal.bind(this);
   }
 
   componentDidMount() {
@@ -99,6 +104,15 @@ export default class App extends React.Component {
       });
   }
 
+  toggleIntroModal() {
+    this.setState({
+      introModalStatus: {
+        show: false,
+        displayNone: true
+      }
+    });
+  }
+
   renderView() {
     if (this.state.view.name === 'catalog') {
       return (
@@ -125,7 +139,11 @@ export default class App extends React.Component {
     return (
       <>
         <div className="container-fluid bg-dark sticky-top shadow-sm">
-          <Header cartItemCount={this.state.cart.length} setView={this.setView}/>
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}
+            toggleIntroModal={this.toggleIntroModal}
+            introModalStatus={this.state.introModalStatus}/>
         </div>
         {this.renderView()}
 
