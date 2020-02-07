@@ -144,11 +144,11 @@ app.post('/api/orders', (req, res, next) => {
     return next(new ClientError('Missing parameters to place order!'), 400);
   } else {
     const sql = `
-       insert into "orders" ("cartId", "name", "creditCard", "shippingAddress", "email", "phone", "expirationDate", "ccv")
+       insert into "orders" ("cartId", "name", "shippingAddress", "email", "phone", "expirationDate", "ccv", "creditCard")
         values ($1, $2, $3, $4, $5, $6, $7, $8)
         returning "createdAt", "creditCard", "name", "orderId", "shippingAddress"
     `;
-    const params = [req.session.cartId, req.body.name, parseInt(req.body.creditCard), req.body.shippingAddress, req.body.email, req.body.phone, req.body.expirationDate, req.body.ccv];
+    const params = [req.session.cartId, req.body.name, req.body.shippingAddress, req.body.email, req.body.phone, req.body.expirationDate, req.body.ccv, parseInt(req.body.creditCard)];
     db.query(sql, params)
       .then(result => {
         delete req.session.cartId;

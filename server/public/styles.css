@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+.intro-modal {
+  width: 80%;
+}
+
 .overlay {
   position: absolute;
   bottom: 0;
@@ -65,8 +69,17 @@
   width: 40%;
 }
 
+.quantity-button {
+  font-size: 1.2rem;
+}
+
+.quantity-button:hover {
+  cursor: pointer;
+}
+
 .quantity-container {
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 .item-container {
@@ -76,7 +89,7 @@
 
 .cart-title,
 .catalog-return {
-  color: rgba(0, 128, 128, 0.81);
+  color:black;
 }
 
 .cart-item-container{
