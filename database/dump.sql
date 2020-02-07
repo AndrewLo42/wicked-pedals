@@ -136,13 +136,13 @@ CREATE TABLE public.orders (
     "orderId" integer NOT NULL,
     "cartId" integer NOT NULL,
     name text NOT NULL,
-    "creditCard" text NOT NULL,
     "shippingAddress" text NOT NULL,
     "createdAt" timestamp(6) with time zone DEFAULT now() NOT NULL,
     email text,
-    phone integer,
+    phone bigint,
     "expirationDate" text,
-    ccv smallint
+    ccv smallint,
+    "creditCard" bigint
 );
 
 
@@ -251,7 +251,7 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt", email, phone, "expirationDate", ccv) FROM stdin;
+COPY public.orders ("orderId", "cartId", name, "shippingAddress", "createdAt", email, phone, "expirationDate", ccv, "creditCard") FROM stdin;
 \.
 
 

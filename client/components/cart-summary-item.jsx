@@ -31,7 +31,7 @@ class cartSummaryItem extends React.Component {
               <div className="text-muted">{this.renderPrice()}</div>
               <div className="pr-1">{this.props.item.shortDescription}</div>
               <div className="d-flex items-number-container">
-                <i className="fas fa-minus-circle my-auto mr-2" onClick={this.removeItem}></i>
+                <i className="fas fa-minus-circle my-auto mr-2 quantity-button" onClick={this.removeItem}></i>
                 <div className="quantity-container p-2 my-auto d-flex">
                   <div className="my-auto">
                     Quantity:
@@ -40,7 +40,7 @@ class cartSummaryItem extends React.Component {
                     {this.props.quantity}
                   </div>
                 </div>
-                <i className="fas fa-plus-circle my-auto ml-2" onClick={this.addAnother}></i>
+                <i className="fas fa-plus-circle my-auto ml-2 quantity-button" onClick={this.addAnother}></i>
               </div>
 
             </div>
