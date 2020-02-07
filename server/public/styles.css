@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .card-img {
   object-fit: contain;
   height: 50%;
