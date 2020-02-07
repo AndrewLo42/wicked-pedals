@@ -23,7 +23,7 @@ class ProductListItem extends React.Component {
 
   render() {
     return (
-      <div className="card item-card col-lg-3 col-md-5 col-sm-6 col-xs-12  m-2 shadow-sm" >
+      <div className="card item-card col-xl-2 col-lg-3 col-md-5 col-sm-6 col-xs-12  m-2 shadow-sm" >
         <div onClick={this.setProductView}>
           <img className="card-img-top card-img pt-1" src={this.props.product.image} alt={this.props.product.name} onClick={this.setProductView}></img>
           <div className="card-body">

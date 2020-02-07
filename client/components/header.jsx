@@ -1,4 +1,5 @@
 import React from 'react';
+import IntroModal from './intro-modal';
 
 class Header extends React.Component {
   constructor(props) {
@@ -32,6 +33,9 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
+        <IntroModal
+          toggleIntroModal={this.props.toggleIntroModal}
+          introModalStatus={this.props.introModalStatus}/>
       </div>
     );
   }
