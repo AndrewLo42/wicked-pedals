@@ -32,7 +32,7 @@ class CartSummary extends React.Component {
       return (<h3 className="text-center border">Cart is Empty!</h3>);
     } else {
       const cartList = productsToShow.map(item =>
-        <CartSummaryItem key={ item.cartItemId } quantity={duplicateProducts[item.productId]}item={ item } deleteFromCart={ this.props.deleteFromCart } addToCart={ this.props.addToCart } />);
+        <CartSummaryItem key={ item.productId} quantity={duplicateProducts[item.productId]}item={ item } deleteFromCart={ this.props.deleteFromCart } addToCart={ this.props.addToCart } />);
       return cartList;
     }
   }
