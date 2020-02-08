@@ -116,9 +116,9 @@ class FormInputs extends React.Component {
         phoneNumberDisplay: event.target.value
       });
     }
-    var matched = event.target.value.match(/^(1|)?(\d{3})(\d{3})(\d{4})/);
+    const matched = this.state.phoneNumber.match(/^(1|)?(\d{3})(\d{3})(\d{4})/);
     if (matched) {
-      var number = ['(', matched[2], ') ', matched[3], '-', matched[4]].join('');
+      const number = ['(', matched[2], ') ', matched[3], '-', matched[4]].join('');
       this.setState({ phoneNumberDisplay: number });
     }
   }
