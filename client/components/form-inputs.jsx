@@ -267,7 +267,7 @@ class FormInputs extends React.Component {
             <div className="phone-number-input form-group col-md-6">
               <label>Phone Number </label>
               <input
-                value={this.state.phoneNumberDisplay}
+                value={this.state.phoneNumber}
                 type="text"
                 name="customer-phone-number"
                 id="customer-phone-number"
