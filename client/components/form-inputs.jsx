@@ -10,7 +10,6 @@ class FormInputs extends React.Component {
       year: '',
       ccv: '',
       shippingAddress: '',
-      secondAddressLine: '',
       city: '',
       usState: '',
       zipcode: '',
@@ -32,24 +31,15 @@ class FormInputs extends React.Component {
         phoneNumber: true,
         email: true,
         consent: true
-      }
-
+      },
+      validOrder: false,
+      secondAddressLine: ''
     };
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleCardChange = this.handleCardChange.bind(this);
-    this.handleMonthChange = this.handleMonthChange.bind(this);
-    this.handleYearChange = this.handleYearChange.bind(this);
-    this.handleCCVChange = this.handleCCVChange.bind(this);
-    this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.handleSecondAddressLineChange = this.handleSecondAddressLineChange.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleZipChange = this.handleZipChange.bind(this);
-    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handleStateChange = this.handleStateChange.bind(this);
-    this.handleConsent = this.handleConsent.bind(this);
     this.setCatalogView = this.setCatalogView.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validation = this.validation.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSecondAddressLineChange = this.handleSecondAddressLineChange.bind(this);
   }
 
   setCatalogView() {
@@ -62,105 +52,165 @@ class FormInputs extends React.Component {
     return (sum / 100).toFixed(2);
   }
 
-  removeInvalids() {
-    const formValidation = {
-      name: true,
-      creditCard: true,
-      month: true,
-      year: true,
-      ccv: true,
-      shippingAddress: true,
-      secondAddressLine: true,
-      city: true,
-      usState: true,
-      zipcode: true,
-      phoneNumber: true,
-      email: true,
-      consent: true
-    };
-    this.setState({ formValidation: formValidation });
-  }
+  handleChange() {
+    const validForm = { ...this.state.formValidation };
+    if (event.target.name === 'customer-name') {
+      this.setState({ name: event.target.value });
+      validForm.name = true;
+    }
+    if (event.target.name === 'customer-email') {
+      this.setState({ email: event.target.value });
+      validForm.email = true;
+    }
+    if (event.target.name === 'customer-phone-number') {
+      if (/^[0-9]*$/.test(event.target.value)) {
+        this.setState({
+          phoneNumber: event.target.value,
+          phoneNumberDisplay: event.target.value
+        });
+        validForm.phoneNumber = true;
+      }
+      const matched = this.state.phoneNumber.match(/^(1|)?(\d{3})(\d{3})(\d{4})/);
+      if (matched) {
+        const number = ['(', matched[2], ') ', matched[3], '-', matched[4]].join('');
+        this.setState({ phoneNumberDisplay: number });
+      }
+      validForm.phoneNumber = true;
+    }
+    if (event.target.name === 'customer-card') {
+      if (/^[0-9]*$/.test(event.target.value)) {
+        validForm.creditCard = true;
+        this.setState({ creditCard: event.target.value });
+      }
+    }
+    if (event.target.name === 'customer-card-ccv') {
+      if (/^[0-9]*$/.test(event.target.value)) {
+        validForm.ccv = true;
+        this.setState({ ccv: event.target.value });
+      }
+    }
+    if (event.target.name === 'month') {
+      this.setState({ month: event.target.value });
+      validForm.month = true;
 
-  handleNameChange() {
-    this.removeInvalids();
-    this.setState({ name: event.target.value });
-  }
+    }
+    if (event.target.name === 'year') {
+      this.setState({ year: event.target.value });
+      validForm.year = true;
 
-  handleAddressChange() {
-    this.removeInvalids();
-    this.setState({ shippingAddress: event.target.value });
+    }
+    if (event.target.name === 'usState') {
+      this.setState({ usState: event.target.value });
+      validForm.usState = true;
+    }
+    if (event.target.name === 'customer-zipcode') {
+      if (/^[0-9]*$/.test(event.target.value)) {
+        validForm.zipcode = true;
+        this.setState({ zipcode: event.target.value });
+      }
+    }
+    if (event.target.name === 'consent') {
+      this.setState({ consent: !this.state.consent });
+      validForm.consent = true;
+    }
+    if (event.target.name === 'customer-address') {
+      this.setState({ shippingAddress: event.target.value });
+      validForm.shippingAddress = true;
+
+    }
+    if (event.target.name === 'customer-city') {
+      this.setState({ city: event.target.value });
+      validForm.city = true;
+    }
+    this.setState({ formValidation: validForm });
   }
 
   handleSecondAddressLineChange() {
-    this.removeInvalids();
     this.setState({ secondAddressLine: event.target.value });
   }
 
-  handleCityChange() {
-    this.removeInvalids();
-    this.setState({ city: event.target.value });
-  }
-
-  handleZipChange() {
-    if (/^[0-9]*$/.test(event.target.value)) {
-      this.removeInvalids();
-      this.setState({ zipcode: event.target.value });
+  validation() {
+    const validForm = { ...this.state.formValidation };
+    const nameRegex = new RegExp(/^[a-zA-Z ]{5,36}$/);
+    const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    if (event.target.name === 'customer-name') {
+      if (!nameRegex.test(this.state.name)) {
+        validForm.name = false;
+      }
     }
-  }
-
-  handlePhoneNumberChange() {
-    if (/^[0-9]*$/.test(event.target.value)) {
-      this.removeInvalids();
+    if (event.target.name === 'customer-email') {
+      if (!emailRegex.test(this.state.email)) {
+        validForm.email = false;
+      }
+    }
+    if (event.target.name === 'customer-phone-number') {
+      if (this.state.phoneNumber.length < 10) {
+        validForm.phoneNumber = false;
+      }
+    }
+    if (event.target.name === 'customer-card') {
+      if (this.state.creditCard.length < 16) {
+        validForm.creditCard = false;
+      }
+    }
+    if (event.target.name === 'customer-card-ccv') {
+      if (this.state.ccv.length < 3) {
+        validForm.ccv = false;
+      }
+    }
+    if (event.target.name === 'month') {
+      if (this.state.month.length < 2) {
+        validForm.month = false;
+      }
+    }
+    if (event.target.name === 'year') {
+      if (this.state.year.length < 4) {
+        validForm.year = false;
+      }
+    }
+    if (event.target.name === 'usState') {
+      if (this.state.usState.length < 2) {
+        validForm.usState = false;
+      }
+    }
+    if (event.target.name === 'customer-zipcode') {
+      if (this.state.zipcode.length < 5) {
+        validForm.zipcode = false;
+      }
+    }
+    if (event.target.name === 'consent') {
+      if (!this.state.consent) {
+        validForm.consent = false;
+      }
+    }
+    if (event.target.name === 'customer-address') {
+      if (this.state.shippingAddress.length < 6) {
+        validForm.shippingAddress = false;
+      }
+    }
+    if (event.target.name === 'customer-city') {
+      if (this.state.city.length < 3) {
+        validForm.city = false;
+      }
+    }
+    if (Object.values(validForm).indexOf(false) === -1 && (Object.values(this.state).indexOf('') === -1 || Object.values(this.state).indexOf('') === 15)) {
       this.setState({
-        phoneNumber: event.target.value,
-        phoneNumberDisplay: event.target.value
+        formValidation: validForm,
+        validOrder: true
+      });
+    } else {
+      this.setState({
+        formValidation: validForm,
+        validOrder: false
       });
     }
-    const matched = this.state.phoneNumber.match(/^(1|)?(\d{3})(\d{3})(\d{4})/);
-    if (matched) {
-      const number = ['(', matched[2], ') ', matched[3], '-', matched[4]].join('');
-      this.setState({ phoneNumberDisplay: number });
-    }
   }
 
-  handleConsent() {
-    this.removeInvalids();
-    this.setState({ consent: !this.state.consent });
-  }
-
-  handleStateChange() {
-    this.removeInvalids();
-    this.setState({ usState: event.target.value });
-  }
-
-  handleEmailChange() {
-    this.removeInvalids();
-    this.setState({ email: event.target.value });
-  }
-
-  handleCardChange() {
-    if (isNaN(parseInt(event.target.value))) {
-      this.removeInvalids();
-      this.setState({ creditCard: '' });
+  renderButton() {
+    if (this.state.validOrder) {
+      return (<button type="submit" className="btn btn-success">Submit Order</button>);
     } else {
-      this.setState({ creditCard: parseInt(event.target.value) });
-    }
-  }
-
-  handleMonthChange() {
-    this.removeInvalids();
-    this.setState({ month: event.target.value });
-  }
-
-  handleYearChange() {
-    this.removeInvalids();
-    this.setState({ year: event.target.value });
-  }
-
-  handleCCVChange() {
-    if (/^[0-9]*$/.test(event.target.value)) {
-      this.removeInvalids();
-      this.setState({ ccv: event.target.value });
+      return (<div className="btn btn-secondary">Submit Order</div>);
     }
   }
 
@@ -239,7 +289,8 @@ class FormInputs extends React.Component {
               name="customer-name"
               id="customer-name"
               placeholder="Customer Name"
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
+              onBlur={this.validation}
               autoComplete="off"
               className={`form-rounded form-control ${this.state.formValidation.name ? '' : 'is-invalid'}`}>
             </input>
@@ -256,7 +307,8 @@ class FormInputs extends React.Component {
                 name="customer-email"
                 id="customer-email"
                 placeholder="Email"
-                onChange={this.handleEmailChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 className={`form-rounded form-control ${this.state.formValidation.email ? '' : 'is-invalid'}`}>
               </input>
@@ -272,13 +324,14 @@ class FormInputs extends React.Component {
                 name="customer-phone-number"
                 id="customer-phone-number"
                 placeholder="Phone Number "
-                onChange={() => this.handlePhoneNumberChange()}
+                onChange={() => this.handleChange()}
+                onBlur={this.validation}
                 autoComplete="off"
                 maxLength="10"
                 className={`form-rounded form-control ${this.state.formValidation.phoneNumber ? '' : 'is-invalid'}`}>
               </input>
               <div className="invalid-feedback">
-                <small>Invalid Phone Number</small>
+                <small>Invalid Phone Number (requires no spaces, no dashes)</small>
               </div>
             </div>
           </div>
@@ -292,12 +345,14 @@ class FormInputs extends React.Component {
                 name="customer-address"
                 id="customer-address"
                 placeholder="Address Line 1"
-                onChange={this.handleAddressChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
+                maxLength="42"
                 className={`form-rounded form-control ${this.state.formValidation.shippingAddress ? '' : 'is-invalid'}`}>
               </input>
               <div className="invalid-feedback">
-                <small>Not a valid address</small>
+                <small>Not a valid shipping address</small>
               </div>
             </div>
             <div className="second-address-input form-group col-6">
@@ -308,6 +363,7 @@ class FormInputs extends React.Component {
                 id="customer-second-address"
                 placeholder="Address Line 2 "
                 onChange={this.handleSecondAddressLineChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 className="form-rounded form-control">
               </input>
@@ -322,19 +378,21 @@ class FormInputs extends React.Component {
                 name="customer-city"
                 id="customer-city"
                 placeholder="City"
-                onChange={this.handleCityChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 className={`form-rounded form-control ${this.state.formValidation.city ? '' : 'is-invalid'}`}>
               </input>
               <div className="invalid-feedback">
-                <small>Invalid City</small>
+                <small>Invalid City name</small>
               </div>
             </div>
             <div className="form-group col-md-3">
               <label htmlFor="inputState">State</label>
               <select className={`form-control ${this.state.formValidation.usState ? '' : 'is-invalid'}`}
                 name="usState"
-                onChange={this.handleStateChange}>
+                onChange={this.handleChange}
+                onBlur={this.validation}>
                 <option defaultValue hidden></option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -400,7 +458,8 @@ class FormInputs extends React.Component {
                 name="customer-zipcode"
                 id="customer-zipcode"
                 placeholder="Zip Code"
-                onChange={this.handleZipChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 minLength="5"
                 maxLength="5"
@@ -423,7 +482,8 @@ class FormInputs extends React.Component {
                 name="customer-card"
                 id="customer-card"
                 placeholder="Credit Card Number"
-                onChange={this.handleCardChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 minLength="16"
                 maxLength="16"
@@ -437,7 +497,8 @@ class FormInputs extends React.Component {
               <label htmlFor="inputState">Month</label>
               <select className={`form-control ${this.state.formValidation.month ? '' : 'is-invalid'}`}
                 name="month"
-                onChange={this.handleMonthChange}>
+                onChange={this.handleChange}
+                onBlur={this.validation}>
                 <option defaultValue hidden></option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -460,7 +521,8 @@ class FormInputs extends React.Component {
               <label htmlFor="inputState">Year</label>
               <select className={`form-control ${this.state.formValidation.year ? '' : 'is-invalid'}`}
                 name="year"
-                onChange={this.handleYearChange}>
+                onChange={this.handleChange}
+                onBlur={this.validation}>
                 <option defaultValue hidden></option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
@@ -488,7 +550,8 @@ class FormInputs extends React.Component {
                 name="customer-card-ccv"
                 id="customer-card-ccv"
                 placeholder="3-4 Digit Validation"
-                onChange={this.handleCCVChange}
+                onChange={this.handleChange}
+                onBlur={this.validation}
                 autoComplete="off"
                 minLength="3"
                 maxLength="4"
@@ -502,14 +565,16 @@ class FormInputs extends React.Component {
 
           <div className="d-flex consent-input form-group input-group pl-3">
             <input
+              name="consent"
               type="checkbox"
               className={`form-check-input ${this.state.formValidation.consent ? '' : 'is-invalid'}`}
-              onChange={this.handleConsent} />
+              onChange={this.handleChange}
+              onBlur={this.validation}/>
             <label className="form-check-label" htmlFor="consent" >
               I understand that this website is for demonstration purposes only,
               and that none of the inputted information should be real information.
               Nothing &quot;purchased&quot; is actually being shipped.
-              I give my consent.
+              My checking this box, I give my consent.
             </label>
             <div className="invalid-feedback">
               <small>Please accept the terms</small>
@@ -517,7 +582,7 @@ class FormInputs extends React.Component {
           </div>
           <div className="row d-flex justify-content-between pl-3 pb-2">
             <div className="order-btn-container">
-              <button type="submit" className="btn btn-success">Submit Order</button>
+              {this.renderButton()}
             </div>
           </div>
         </form>
