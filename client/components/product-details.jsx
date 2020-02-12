@@ -1,14 +1,17 @@
 import React from 'react';
+import AddModal from './add-modal';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      showModal: false
     };
     this.setCatalogView = this.setCatalogView.bind(this);
     this.renderPrice = this.renderPrice.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.toggleAddModal = this.toggleAddModal.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +25,7 @@ class ProductDetails extends React.Component {
   }
 
   addItemToCart() {
+    this.toggleAddModal();
     this.props.addToCart({ productId: this.state.product.productId });
   }
 
@@ -35,7 +39,7 @@ class ProductDetails extends React.Component {
   }
 
   toggleAddModal() {
-
+    this.setState({ showModal: !this.state.showModal });
   }
 
   render() {
@@ -63,6 +67,7 @@ class ProductDetails extends React.Component {
             </div>
             <p className="p-2">{this.state.product.longDescription}</p>
           </div>
+          <AddModal modalStatus={this.state.showModal} product={this.state.product} toggleAddModal={this.toggleAddModal} setView={this.props.setView}/>
         </div>
       );
 
