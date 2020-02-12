@@ -41,6 +41,8 @@ class CartSummary extends React.Component {
     this.props.cartItems.map(product => {
       if (duplicateProducts[product.productId] !== undefined) {
         duplicateProducts[product.productId] += 1;
+        const productIdx = productsToShow.findIndex(prod => prod.productId === product.productId);
+        productsToShow[productIdx] = product;
       } else {
         duplicateProducts[product.productId] = 1;
         productsToShow.push(product);

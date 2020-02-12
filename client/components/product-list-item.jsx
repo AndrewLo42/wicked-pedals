@@ -8,6 +8,7 @@ class ProductListItem extends React.Component {
   }
 
   addItemToCart() {
+    this.props.showPopUp();
     this.props.addToCart({ productId: this.props.product.productId });
   }
 

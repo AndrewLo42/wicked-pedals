@@ -20,9 +20,9 @@ class RemoveModal extends React.Component {
             <div className="d-flex">
             </div>
             <div className="text-center w-20">
-              <button className="mr-1 btn btn-danger accept-button w-20 col-md-2 col-4"
+              <button className="mr-1 btn btn-danger accept-button w-20 col-md-3 col-4"
                 onClick={() => this.deleteItem()}>Confirm</button>
-              <button className="btn btn-warning accept-button w-20 col-md-2 col-4"
+              <button className="btn btn-warning accept-button w-20 col-md-3 col-4"
                 onClick={() => this.props.closeModal()}>Cancel</button>
             </div>
           </div>
