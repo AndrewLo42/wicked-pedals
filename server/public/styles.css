@@ -18,8 +18,24 @@
   width: 100%;
 }
 
+.add-modal {
+  width: 70%;
+}
+.exit-modal {
+  font-size: 1.5rem;
+  width: 5%;
+}
+.exit-modal:hover {
+  cursor: pointer;
+  color: lightskyblue;
+}
+.closing-modal,
 .intro-modal {
   width: 80%;
+}
+
+.closing-modal {
+  z-index: 100;
 }
 
 .overlay {
@@ -134,4 +150,9 @@ body{
 @keyframes fade-in {
   0% { opacity: 0; }
   100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }

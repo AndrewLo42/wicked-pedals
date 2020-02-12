@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import ThankYou from './thank-you';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -99,7 +100,7 @@ export default class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        this.setView('catalog', {});
+        this.setView('purchased', {});
         this.setState({ cart: [] });
       });
   }
@@ -127,6 +128,10 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'checkout') {
       return (
         <CheckoutForm setView={this.setView} cartItems={this.state.cart} onSubmit={this.placeOrder}/>
+      );
+    } else if (this.state.view.name === 'purchased') {
+      return (
+        <ThankYou setView={this.setView}/>
       );
     } else {
       return (

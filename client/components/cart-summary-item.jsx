@@ -3,8 +3,12 @@ import React from 'react';
 class cartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalStatus: false
+    };
     this.removeItem = this.removeItem.bind(this);
     this.addAnother = this.addAnother.bind(this);
+    this.closeModal = this.closeRemoveModal.bind(this);
   }
 
   addAnother() {
@@ -17,7 +21,15 @@ class cartSummaryItem extends React.Component {
   }
 
   removeItem() {
-    this.props.deleteFromCart(this.props.item.cartItemId);
+    if (this.props.quantity === 1) {
+      this.props.openModal(this.props.item);
+    } else {
+      this.props.deleteFromCart(this.props.item.cartItemId);
+    }
+  }
+
+  closeRemoveModal() {
+    this.props.closeModal();
   }
 
   render() {
@@ -42,7 +54,6 @@ class cartSummaryItem extends React.Component {
                 </div>
                 <i className="fas fa-plus-circle my-auto ml-2 quantity-button" onClick={this.addAnother}></i>
               </div>
-
             </div>
           </div>
         </div>

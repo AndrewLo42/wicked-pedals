@@ -27,9 +27,6 @@ class CheckoutForm extends React.Component {
       }
 
     };
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleCardChange = this.handleCardChange.bind(this);
-    this.handleAddressChange = this.handleAddressChange.bind(this);
     this.setCatalogView = this.setCatalogView.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -42,22 +39,6 @@ class CheckoutForm extends React.Component {
     const cartItems = this.props.cartItems;
     const sum = cartItems.reduce((accumulator, currentPrice) => accumulator + currentPrice.price, 0);
     return (sum / 100).toFixed(2);
-  }
-
-  handleNameChange() {
-    this.setState({ name: event.target.value });
-  }
-
-  handleAddressChange() {
-    this.setState({ shippingAddress: event.target.value });
-  }
-
-  handleCardChange() {
-    if (isNaN(parseInt(event.target.value))) {
-      this.setState({ creditCard: '' });
-    } else {
-      this.setState({ creditCard: parseInt(event.target.value) });
-    }
   }
 
   handleSubmit() {

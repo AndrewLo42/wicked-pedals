@@ -1,11 +1,30 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
+import RemoveModal from './remove-modal';
 
 class CartSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalStatus: false,
+      itemToRemove: {}
+    };
     this.setCatalogView = this.setCatalogView.bind(this);
     this.setCheckout = this.setCheckout.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal(item) {
+
+    this.setState({
+      modalStatus: true,
+      itemToRemove: item
+    });
+  }
+
+  closeModal() {
+    this.setState({ modalStatus: false });
   }
 
   setCatalogView() {
@@ -32,7 +51,7 @@ class CartSummary extends React.Component {
       return (<h3 className="text-center border">Cart is Empty!</h3>);
     } else {
       const cartList = productsToShow.map(item =>
-        <CartSummaryItem key={ item.productId} quantity={duplicateProducts[item.productId]}item={ item } deleteFromCart={ this.props.deleteFromCart } addToCart={ this.props.addToCart } />);
+        <CartSummaryItem key={ item.productId} closeModal={this.closeModal} openModal={this.openModal} quantity={duplicateProducts[item.productId]}item={ item } deleteFromCart={ this.props.deleteFromCart } addToCart={ this.props.addToCart } />);
       return cartList;
     }
   }
@@ -68,6 +87,7 @@ class CartSummary extends React.Component {
           </div>
           {this.renderCheckoutButton()}
         </div>
+        <RemoveModal modalStatus={this.state.modalStatus} item={this.state.itemToRemove} closeModal={this.closeModal} deleteFromCart={this.props.deleteFromCart} />
       </div>
     );
   }
