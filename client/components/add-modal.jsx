@@ -29,9 +29,9 @@ class AddModal extends React.Component {
             </div>
             <p className="text-center"></p>
             <div className="text-center w-20">
-              <button className="mr-1 btn btn-primary accept-button w-20 col-md-5 col-4"
+              <button className="mr-1 btn btn-primary accept-button w-20 col-md-5 col-12"
                 onClick={() => this.setCatalogView()}>Continue Shopping</button>
-              <button className="btn btn-warning accept-button w-20 col-md-5 col-4"
+              <button className="btn btn-warning accept-button w-20 col-md-5 col-12"
                 onClick={() => this.setCartView()}>Go to Cart</button>
             </div>
           </div>
