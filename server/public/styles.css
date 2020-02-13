@@ -20,6 +20,7 @@
 
 .add-modal {
   width: 70%;
+  transition: 1s;
 }
 .exit-modal {
   font-size: 1.5rem;
@@ -32,6 +33,7 @@
 .closing-modal,
 .intro-modal {
   width: 80%;
+  transition: 1s;
 }
 
 .closing-modal {

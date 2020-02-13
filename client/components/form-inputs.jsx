@@ -210,12 +210,17 @@ class FormInputs extends React.Component {
     if (this.state.validOrder) {
       return (<button type="submit" className="btn btn-success">Submit Order</button>);
     } else {
-      return (<div className="btn btn-secondary">Submit Order</div>);
+      return (<div className=" btn btn-secondary">Submit Order</div>);
     }
   }
 
   handleSubmit() {
     event.preventDefault();
+
+    if (!this.state.validOrder) {
+      return;
+    }
+
     const validForm = { ...this.state.formValidation };
     const nameRegex = new RegExp(/^[a-zA-Z ]+$/);
     const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -574,7 +579,7 @@ class FormInputs extends React.Component {
               I understand that this website is for demonstration purposes only,
               and that none of the inputted information should be real information.
               Nothing &quot;purchased&quot; is actually being shipped.
-              My checking this box, I give my consent.
+              By checking this box, I give my consent.
             </label>
             <div className="invalid-feedback">
               <small>Please accept the terms</small>
