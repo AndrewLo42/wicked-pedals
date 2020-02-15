@@ -40,6 +40,7 @@ class FormInputs extends React.Component {
     this.validation = this.validation.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSecondAddressLineChange = this.handleSecondAddressLineChange.bind(this);
+    this.checkValidOrder = this.checkValidOrder.bind(this);
   }
 
   setCatalogView() {
@@ -122,7 +123,9 @@ class FormInputs extends React.Component {
       this.setState({ city: event.target.value });
       validForm.city = true;
     }
+
     this.setState({ formValidation: validForm });
+    setTimeout(this.checkValidOrder, 200);
   }
 
   handleSecondAddressLineChange() {
@@ -195,12 +198,64 @@ class FormInputs extends React.Component {
     }
     if (Object.values(validForm).indexOf(false) === -1 && (Object.values(this.state).indexOf('') === -1 || Object.values(this.state).indexOf('') === 15)) {
       this.setState({
-        formValidation: validForm,
+        formValidation: validForm
+
+      });
+    } else {
+      this.setState({
+        formValidation: validForm
+
+      });
+    }
+  }
+
+  checkValidOrder() {
+    const validForm = { ...this.state.formValidation };
+    const nameRegex = new RegExp(/^[a-zA-Z ]{5,36}$/);
+    const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+    if (!nameRegex.test(this.state.name)) {
+      validForm.name = false;
+    }
+    if (!emailRegex.test(this.state.email)) {
+      validForm.email = false;
+    }
+    if (this.state.phoneNumber.length < 10) {
+      validForm.phoneNumber = false;
+    }
+    if (this.state.creditCard.length < 16) {
+      validForm.creditCard = false;
+    }
+    if (this.state.ccv.length < 3) {
+      validForm.ccv = false;
+    }
+    if (this.state.month.length < 2) {
+      validForm.month = false;
+    }
+    if (this.state.year.length < 4) {
+      validForm.year = false;
+    }
+    if (this.state.usState.length < 2) {
+      validForm.usState = false;
+    }
+    if (this.state.zipcode.length < 5) {
+      validForm.zipcode = false;
+    }
+    if (!this.state.consent) {
+      validForm.consent = false;
+    }
+    if (this.state.shippingAddress.length < 3) {
+      validForm.shippingAddress = false;
+    }
+    if (this.state.city.length < 3) {
+      validForm.city = false;
+    }
+    if (Object.values(validForm).indexOf(false) === -1) {
+      this.setState({
         validOrder: true
       });
     } else {
       this.setState({
-        formValidation: validForm,
         validOrder: false
       });
     }
@@ -222,7 +277,7 @@ class FormInputs extends React.Component {
     }
 
     const validForm = { ...this.state.formValidation };
-    const nameRegex = new RegExp(/^[a-zA-Z ]+$/);
+    const nameRegex = new RegExp(/^[a-zA-Z ]{5,36}$/);
     const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
     if (!nameRegex.test(this.state.name)) {
@@ -300,7 +355,7 @@ class FormInputs extends React.Component {
               className={`form-rounded form-control ${this.state.formValidation.name ? '' : 'is-invalid'}`}>
             </input>
             <div className="invalid-feedback">
-              <small>Not a valid name input.</small>
+              <small>Please put your full name.</small>
             </div>
           </div>
           <div className="form-row">
