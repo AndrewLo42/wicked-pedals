@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductListItem from './product-list-item';
 import CartNotification from './cart-notification';
+import CatalogBanner from './catalog-banner';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -40,11 +41,16 @@ class ProductList extends React.Component {
     const productList = this.state.products.map(product =>
       <ProductListItem key={product.productId} product={product} setView={this.props.setView} addToCart={this.props.addToCart} showPopUp={this.showPopUp} hidePopUp={this.hidePopUp}/>);
     return (
-      <div className="row justify-content-center mt-5">
-        {productList}
-        <CartNotification modalStatus={this.state.showNotification} hidePopUp={this.hidePopUp} setView={this.props.setView}/>
-      </div>
+      <>
+        <CatalogBanner />
+        <div className="container-fluid">
+          <div className=" row justify-content-center mt-5">
+            {productList}
+            <CartNotification modalStatus={this.state.showNotification} hidePopUp={this.hidePopUp} setView={this.props.setView}/>
+          </div>
 
+        </div>
+      </>
     );
   }
 
