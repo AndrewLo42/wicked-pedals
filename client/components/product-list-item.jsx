@@ -37,7 +37,7 @@ class ProductListItem extends React.Component {
         </div>
 
         <div className="card-text ">
-          <p className="mt-3" onClick={this.setProductView}>{this.props.product.shortDescription}</p>
+          <p className="mt-1" onClick={this.setProductView}>{this.props.product.shortDescription}</p>
           <div className="row justify-content-around">
             <button className="mt-2 btn btn-primary" onClick={this.setProductView}>Details</button>
             <button className="mt-2 btn btn-secondary add-btn" onClick={this.addItemToCart}>Quick Add</button>

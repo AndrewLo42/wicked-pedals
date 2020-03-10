@@ -117,7 +117,7 @@ export default class App extends React.Component {
   renderView() {
     if (this.state.view.name === 'catalog') {
       return (
-        <div className="container-fluid">
+        <div className="">
           <ProductList setView={this.setView} addToCart={this.addToCart} />
         </div>
       );
