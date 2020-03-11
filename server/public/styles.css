@@ -186,8 +186,18 @@ body{
 * {
   animation: fade-in 0.5s;
 }
-
-
+.footer-container {
+  position: relative;
+}
+.footer-link:hover {
+  color: yellow;
+}
+.footer-logo {
+  height: 2.4rem;
+}
+.footer-creds {
+  color: white;
+}
 
 @keyframes fade-in {
   0% { opacity: 0; }
