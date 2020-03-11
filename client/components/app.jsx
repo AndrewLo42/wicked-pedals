@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import ThankYou from './thank-you';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -151,7 +152,7 @@ export default class App extends React.Component {
             introModalStatus={this.state.introModalStatus}/>
         </div>
         {this.renderView()}
-
+        <Footer />
       </>
     );
   }
